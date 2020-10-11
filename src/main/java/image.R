@@ -1,0 +1,10 @@
+nba = read.csv("J:\\deep learning\\untitled2\\spearman_1.csv",row.names = 1)
+nba_sig_test = read.csv("J:\\deep learning\\untitled2\\spearman_1_correct.csv",row.names = 1)
+matr = as.matrix(nba)
+matr_test = as.matrix(nba_sig_test)
+library(ggplot2)
+library(GGally)
+library(corrplot)
+col=colorRampPalette(c("navy", "black", "firebrick3"))
+corrplot(matr,type="upper",method="number",col=col(10),p.mat=matr_test)    
+

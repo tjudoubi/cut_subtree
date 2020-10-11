@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: WriteAST
+Class-Path: antlr4-runtime-4.7.2.jar
+

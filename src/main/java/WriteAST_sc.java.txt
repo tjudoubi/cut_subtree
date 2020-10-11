@@ -1,0 +1,135 @@
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import java.io.*;
+import java.util.ArrayList;
+
+public class WriteAST_sc {
+    public static String run(String expr) throws Exception{
+
+        ANTLRInputStream in = new ANTLRInputStream(expr);
+
+        JavaScriptLexer lexer = new JavaScriptLexer(in);
+
+
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+
+        JavaScriptParser parser = new JavaScriptParser(tokens);
+        ParseTree tree = parser.program();
+        ParseTreeWalker walker = new ParseTreeWalker();
+        //walker.walk(new MyListener(),tree);
+//        System.out.println(tree.toStringTree(parser));
+
+
+
+        return tree.toStringTree(parser);
+
+
+    }
+
+
+    public static String run_2(String expr) throws Exception{
+
+
+        ANTLRInputStream in = new ANTLRInputStream(expr);
+
+
+        JavaScriptLexer lexer = new JavaScriptLexer(in);
+
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+
+        JavaScriptParser parser = new JavaScriptParser(tokens);
+        ParseTree tree = parser.program();
+
+        ParseTreeWalker walker = new ParseTreeWalker();
+
+
+        YVisitor visitor = new YVisitor();
+        YListener listener = new YListener();
+        visitor.visit(tree);
+        walker.walk(listener,tree);
+
+        int length = listener.list.size();
+//        System.out.println(length);
+        String content = "";
+        for(int i = 0;i < length;i++){
+            Integer id = listener.list.get(i).id;
+            String[] ass = listener.list.get(i).interval.split("\\.\\.");
+            Integer len = Integer.valueOf(ass[1])-Integer.valueOf(ass[0]);
+            content += listener.list.get(i).type_+" ,,, "+ass[0]+" ,,, "+ass[1]+" ,,, "+ id.toString() + " ,,, "+ len.toString()+'\n';
+        }
+        System.out.println(content);
+        visitor.id = 0;
+
+        return content;
+
+    }
+
+    public static void main(String[] args) throws Exception{
+        String file_path = "D:/datasetforTBCCD-master/jsc-CVE/";
+//        System.out.println(args[0]);
+        //ArrayList<String> files = getFiles("D:/datasetforTBCCD-master/Graduate_experiment-master/opo_js/test_file");
+//        String file_string = file_path + "new 122.js";
+//        String file_string = file_path + args[0];
+        String file_string = args[0];
+
+        File file = new File(file_string);
+        FileReader fr = new FileReader(file);
+        BufferedReader bf = new BufferedReader(fr);
+        String res = "";
+        String str;
+//        System.out.println(file_string);
+        while ((str = bf.readLine()) != null) {
+            res = res + str;
+        }
+//        System.out.println(res);
+//        String write_content = run(res);
+//        go_write(write_content,file_string,"test_target_file1/");
+        String node_content = run_2(res);
+//        go_write(node_content,file_string,"test_target_file2/");
+//
+//
+//
+//            System.out.println("\n")
+
+
+    }
+
+    private static void go_write(String write_content,String file_string,String resr) throws IOException {
+        String[]  file_names = file_string.split("/");
+        String file_name = file_names[file_names.length-1];
+//        System.out.println("xxxxxxxxxxxxxx"+file_name);
+        FileWriter writer;
+        try {
+            writer = new FileWriter("D:/datasetforTBCCD-master/Graduate_experiment-master/opo_js/"+resr+file_name+".txt");
+
+            writer.write("");
+            writer.write(write_content);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static ArrayList<String> getFiles(String path) {
+        ArrayList<String> files = new ArrayList<String>();
+        File file = new File(path);
+        File[] tempList = file.listFiles();
+        for (int i = 0; i < tempList.length; i++) {
+            if (tempList[i].isFile()) {
+                files.add(tempList[i].toString());
+                //System.out.println(files.get(i));
+
+                //String fileName = tempList[i].getName();
+            }
+            if (tempList[i].isDirectory()) {
+
+            }
+        }
+        return files;
+    }
+}

@@ -1,0 +1,1 @@
+javac -d bin/ src/main/java/WriteAST.java src/main/java/YVisitor.java src/main/java/JavaScriptParserVisitor.java src/main/java/JavaScriptParserListener.java src/main/java/JavaScriptParser.java src/main/java/JavaScriptLexer.java
