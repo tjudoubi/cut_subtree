@@ -7,7 +7,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class cut_subtree {
-    public static void run_2(String expr) throws Exception{
+    public static void run_2(String expr,YListener listener) throws Exception{
 
 
         ANTLRInputStream in = new ANTLRInputStream(expr);
@@ -23,24 +23,10 @@ public class cut_subtree {
         ParseTreeWalker walker = new ParseTreeWalker();
 
 
-//        YVisitor visitor = new YVisitor();
-        YListener listener = new YListener();
-//        visitor.visit(tree);
+
         walker.walk(listener,tree);
 
-//        int length = listener.list.size();
-////        System.out.println(length);
-//        String content = "";
-//        for(int i = 0;i < length;i++){
-//            Integer id = listener.list.get(i).id_;
-//            String[] ass = listener.list.get(i).interval.split("\\.\\.");
-//            Integer len = Integer.valueOf(ass[1])-Integer.valueOf(ass[0]);
-//            content += listener.list.get(i).type_+" ,,, "+ass[0]+" ,,, "+ass[1]+" ,,, "+ id.toString() + " ,,, "+ len.toString()+'\n';
-//        }
-////        System.out.println(content);
-//        listener.id = 0;
 
-//        return content;
 
     }
 
@@ -51,6 +37,7 @@ public class cut_subtree {
 //        String file_string = args;
         File dir = new File("./pool");
         dir.mkdir();
+        YListener listener = new YListener();
         File file = new File(file_string);
         FileReader fr = new FileReader(file);
         BufferedReader bf = new BufferedReader(fr);
@@ -60,7 +47,7 @@ public class cut_subtree {
         while ((str = bf.readLine()) != null) {
             res = res + str;
         }
-        run_2(res);
+        run_2(res,listener);
 
     }
 }

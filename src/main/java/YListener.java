@@ -62,7 +62,7 @@ public class YListener extends JavaScriptParserBaseListener{
         String type_;
     };
     ArrayList<Node> list = new ArrayList<>();
-    Stack<Integer> index_stack = new Stack();
+    Stack<Integer> index_stack = new Stack<>();
     /**
      * {@inheritDoc}
      *
@@ -551,7 +551,7 @@ public class YListener extends JavaScriptParserBaseListener{
     @Override public void exitForStatement(JavaScriptParser.ForStatementContext ctx) {
         int index_top = index_stack.pop();
         count_for = count_for + 1;
-        createSubTree(index_top,list,count_for,"SourceElement",ctx.getText());
+        createSubTree(index_top,list,count_for,"ForStatement",ctx.getText());
     }
     /**
      * {@inheritDoc}
@@ -646,7 +646,7 @@ public class YListener extends JavaScriptParserBaseListener{
     @Override public void exitBreakStatement(JavaScriptParser.BreakStatementContext ctx) {
         int index_top = index_stack.pop();
         count_break = count_break + 1;
-        createSubTree(index_top,list,count_break,"SourceElement",ctx.getText());
+        createSubTree(index_top,list,count_break,"BreakStatement",ctx.getText());
     }
     /**
      * {@inheritDoc}
@@ -994,7 +994,7 @@ public class YListener extends JavaScriptParserBaseListener{
     @Override public void exitMethodDefinition(JavaScriptParser.MethodDefinitionContext ctx) {
         int index_top = index_stack.pop();
         count_i = count_i + 1;
-        createSubTree(index_top,list,count_i,"MethodDefinition",ctx.getText());
+        createSubTree(index_top,list,count_i,"Initialiser",ctx.getText());
     }
     /**
      * {@inheritDoc}
@@ -1074,7 +1074,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterSourceElements(JavaScriptParser.SourceElementsContext ctx) {
-        add_Node_node(ctx.getSourceInterval().toString(),"Block",id);
+        add_Node_node(ctx.getSourceInterval().toString(),"SourceElements",id);
         index_stack.push(list.size()-1);
         id += 1;
 
