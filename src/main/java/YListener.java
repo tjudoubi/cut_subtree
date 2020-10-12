@@ -92,13 +92,13 @@ public class YListener extends JavaScriptParserBaseListener{
             Integer len = Integer.valueOf(ass[1])-Integer.valueOf(ass[0]);
             content += list.get(i).type_+" ,,, "+ass[0]+" ,,, "+ass[1]+" ,,, "+ id.toString() + " ,,, "+ len.toString()+'\n';
         }
-        File dir = new File("D:\\cut_subtree\\pool\\"+type_);
+        File dir = new File("D:\\cut_subtree\\pool_structure\\"+type_);
         if(!dir.exists()){
             dir.mkdir();
         }
         FileWriter writer;
         try {
-            writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + parent_file_name + "_"+count.toString() + ".js.structure");
+            writer = new FileWriter("D:\\cut_subtree\\pool_structure\\"+type_ + "\\" + parent_file_name + "_"+count.toString() + ".js.structure");
             writer.write(content);
             writer.flush();
             writer.close();
@@ -106,6 +106,10 @@ public class YListener extends JavaScriptParserBaseListener{
             e.printStackTrace();
         }
 
+        dir = new File("D:\\cut_subtree\\pool\\"+type_);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
 //        File f2 = new File("D:\\cut_subtree\\src\\main\\java\\pool\\"+type_ + "\\" + count.toString() + ".js");
         try {
             writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + parent_file_name + "_" + count.toString() + ".js");

@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java.io.*;
 import java.util.ArrayList;
 
-public class cut_subtree {
+public class test {
     public static void run_2(String expr,YListener listener) throws Exception{
 
 
@@ -38,9 +38,6 @@ public class cut_subtree {
         File dir = new File("./pool");
         dir.mkdir();
 
-        dir = new File("./pool_structure");
-        dir.mkdir();
-
         String path = "./jsc-a";
         ArrayList<String> files_path = new ArrayList<String>();
         File dir_file = new File(path);
@@ -61,7 +58,7 @@ public class cut_subtree {
         for(int i = 0;i < tempList.length;i++) {
             String[] words1 = files_path.get(i).split("\\\\");
             YListener.parent_file_name = words1[words1.length-1];
-//            System.out.println(words1[words1.length-1]);
+            System.out.println(words1[words1.length-1]);
             File file = new File(files_path.get(i));
 //            String[] words1 = files_path.get(i).split("\\\\");
 //            System.out.println(words1[words1.length-1]);
