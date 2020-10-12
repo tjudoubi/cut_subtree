@@ -63,11 +63,15 @@ public class YListener extends JavaScriptParserBaseListener{
     };
     ArrayList<Node> list = new ArrayList<>();
     Stack<Integer> index_stack = new Stack<>();
+    public static String parent_file_name;
     /**
      * {@inheritDoc}
      *
      * <p>The default implementation does nothing.</p>
      */
+//    YListener(String parent_file_name){
+//        YListener.parent_file_name = parent_file_name;
+//    }
 
     public void add_Node_node(String interval, String type_,int id_){
         Node node_temp = new Node();
@@ -94,7 +98,7 @@ public class YListener extends JavaScriptParserBaseListener{
         }
         FileWriter writer;
         try {
-            writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + count.toString() + ".js.structure");
+            writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + parent_file_name + "_"+count.toString() + ".js.structure");
             writer.write(content);
             writer.flush();
             writer.close();
@@ -104,7 +108,7 @@ public class YListener extends JavaScriptParserBaseListener{
 
 //        File f2 = new File("D:\\cut_subtree\\src\\main\\java\\pool\\"+type_ + "\\" + count.toString() + ".js");
         try {
-            writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + count.toString() + ".js");
+            writer = new FileWriter("D:\\cut_subtree\\pool\\"+type_ + "\\" + parent_file_name + "_" + count.toString() + ".js");
             writer.write(code);
             writer.flush();
             writer.close();
