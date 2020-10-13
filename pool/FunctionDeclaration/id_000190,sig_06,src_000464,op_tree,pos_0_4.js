@@ -1,0 +1,1 @@
+functionInner(){Inner()}

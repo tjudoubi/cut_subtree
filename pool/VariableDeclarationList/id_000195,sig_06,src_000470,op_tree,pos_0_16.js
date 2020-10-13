@@ -1,0 +1,1 @@
+varval=inner.doStuff()

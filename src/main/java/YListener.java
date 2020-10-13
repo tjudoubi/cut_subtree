@@ -72,6 +72,38 @@ public class YListener extends JavaScriptParserBaseListener{
 //    YListener(String parent_file_name){
 //        YListener.parent_file_name = parent_file_name;
 //    }
+////////////////////////////normalization用///////////////////////////
+    public static int expression_ele = 0;
+    public static int variable_decl = 0;
+    public static int assign = 0;
+    public static int formalparameterarg = 0;
+    public static int expression = 0;
+    public static int identifier = 0;
+    public static int memberindex = 0;
+    public static int expression_seq = 0;
+    public static int numeric = 0;
+    HashMap<String, Integer> map = new HashMap<String, Integer>(){
+        {
+            put("[",0);put("]",0);put("(",0);put(")",0);put("{",0);put("}",0);put(";",0);
+            put(",",0);put("=",0);put("?",0);put("...",0);put(".",0);put("++",0);put("--",0);
+            put("+",0);put("-",0);put("~",0);put("!",0);put("*",0);put("/",0);put("%",0);
+            put("**",0);put("??",0);put("#",0);put(">>",0);put("<<",0);put(">>>",0);put("<",0);
+            put(">",0);put("<=",0);put(">=",0);put("==",0);put("!=",0);put("===",0);put("!==",0);
+            put("&",0);put("^",0);put("|",0);put("&&",0);put("||",0);put("*=",0);put("/=",0);
+            put("%=",0);put("+=",0);put("-=",0);put("<<=",0);put(">>=",0);put(">>>=",0);put("&=",0);
+            put("^=",0);put("|=",0);put("**=",0);put("=>",0);put("null",0);put("true",0);put("false",0);
+            put("break",0);put("do",0);put("instanceof",0);put("typeof",0);put("case",0);put("else",0);
+            put("new",0);put("var",0);put("catch",0);put("finally",0);put("return",0);put("void",0);put("continue",0);
+            put("for",0);put("switch",0);put("while",0);put("debugger",0);put("function",0);put("this",0);put("with",0);
+            put("default",0);put("if",0);put("throw",0);put("delete",0);put("in",0);put("try",0);put("as",0);
+            put("from",0);put("class",0);put("enum",0);put("extends",0);put("super",0);put("const",0);put("export",0);
+            put("import",0);put("async",0);put("await",0);put("implements",0);put("let",0);put("private",0);
+            put("public",0);put("interface",0);put("package",0);put("protected",0);put("static",0);put("yield",0);
+        }
+    };
+/////////////////////////////////////////////////////////////////////
+
+
 
     public void add_Node_node(String interval, String type_,int id_){
         Node node_temp = new Node();
@@ -409,6 +441,7 @@ public class YListener extends JavaScriptParserBaseListener{
     @Override public void enterVariableDeclarationList(JavaScriptParser.VariableDeclarationListContext ctx) {
         add_Node_node(ctx.getSourceInterval().toString(),"VariableDeclarationList",id);
         index_stack.push(list.size()-1);
+        variable_decl += 1;
         id += 1;
     }
     /**
@@ -417,6 +450,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitVariableDeclarationList(JavaScriptParser.VariableDeclarationListContext ctx) {
+        variable_decl -= 1;
         int index_top = index_stack.pop();
         count_vd = count_vd + 1;
         createSubTree(index_top,list,count_vd,"VariableDeclarationList",ctx.getText());
@@ -1031,6 +1065,7 @@ public class YListener extends JavaScriptParserBaseListener{
      */
     @Override public void enterFormalParameterArg(JavaScriptParser.FormalParameterArgContext ctx) {
         add_Node_node(ctx.getSourceInterval().toString(),"FormalParameterArg",id);
+        formalparameterarg += 1;
 //        index_stack.push(list.size()-1);
         id += 1;
     }
@@ -1039,7 +1074,9 @@ public class YListener extends JavaScriptParserBaseListener{
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitFormalParameterArg(JavaScriptParser.FormalParameterArgContext ctx) { }
+    @Override public void exitFormalParameterArg(JavaScriptParser.FormalParameterArgContext ctx) {
+        formalparameterarg -= 1;
+    }
     /**
      * {@inheritDoc}
      *
@@ -1328,6 +1365,7 @@ public class YListener extends JavaScriptParserBaseListener{
      */
     @Override public void enterExpressionSequence(JavaScriptParser.ExpressionSequenceContext ctx) {
         add_Node_node(ctx.getSourceInterval().toString(),"ExpressionSequence",id);
+        expression_seq += 1;
 //        index_stack.push(list.size()-1);
         id += 1;
     }
@@ -1337,7 +1375,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitExpressionSequence(JavaScriptParser.ExpressionSequenceContext ctx) {
-
+        expression_seq -= 1;
     }
     /**
      * {@inheritDoc}
@@ -1661,6 +1699,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterAssignmentExpression(JavaScriptParser.AssignmentExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"AssignmentExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1671,6 +1710,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitAssignmentExpression(JavaScriptParser.AssignmentExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -1801,6 +1841,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterEqualityExpression(JavaScriptParser.EqualityExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"EqualityExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1811,6 +1852,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitEqualityExpression(JavaScriptParser.EqualityExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -1821,6 +1863,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterBitXOrExpression(JavaScriptParser.BitXOrExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"BitXOrExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1831,6 +1874,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitBitXOrExpression(JavaScriptParser.BitXOrExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -1861,6 +1905,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterMultiplicativeExpression(JavaScriptParser.MultiplicativeExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"MultiplicativeExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1871,6 +1916,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitMultiplicativeExpression(JavaScriptParser.MultiplicativeExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -1881,6 +1927,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterBitShiftExpression(JavaScriptParser.BitShiftExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"BitShiftExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1891,6 +1938,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitBitShiftExpression(JavaScriptParser.BitShiftExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -1921,6 +1969,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterAdditiveExpression(JavaScriptParser.AdditiveExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"AdditiveExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -1931,6 +1980,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitAdditiveExpression(JavaScriptParser.AdditiveExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2001,6 +2051,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterBitNotExpression(JavaScriptParser.BitNotExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"BitNotExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2011,6 +2062,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitBitNotExpression(JavaScriptParser.BitNotExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2121,6 +2173,8 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterMemberIndexExpression(JavaScriptParser.MemberIndexExpressionContext ctx) {
+        memberindex += 2;
+        expression_seq += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"MemberIndexExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2131,6 +2185,8 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitMemberIndexExpression(JavaScriptParser.MemberIndexExpressionContext ctx) {
+        memberindex -= 2;
+        expression_seq -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2141,6 +2197,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterIdentifierExpression(JavaScriptParser.IdentifierExpressionContext ctx) {
+        identifier += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"IdentifierExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2151,6 +2208,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitIdentifierExpression(JavaScriptParser.IdentifierExpressionContext ctx) {
+        identifier -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2161,6 +2219,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterBitAndExpression(JavaScriptParser.BitAndExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"BitAndExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2171,6 +2230,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitBitAndExpression(JavaScriptParser.BitAndExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2181,6 +2241,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterBitOrExpression(JavaScriptParser.BitOrExpressionContext ctx) {
+        expression += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"BitOrExpression",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2191,6 +2252,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitBitOrExpression(JavaScriptParser.BitOrExpressionContext ctx) {
+        expression -= 1;
         int index_top = index_stack.pop();
         count_expression = count_expression + 1;
         createSubTree(index_top,list,count_expression,"Expression",ctx.getText());
@@ -2261,6 +2323,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterAssignable(JavaScriptParser.AssignableContext ctx) {
+        assign += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"Assignable",id);
 //        index_stack.push(list.size()-1);
         id += 1;
@@ -2270,7 +2333,7 @@ public class YListener extends JavaScriptParserBaseListener{
      *
      * <p>The default implementation does nothing.</p>
      */
-    @Override public void exitAssignable(JavaScriptParser.AssignableContext ctx) { }
+    @Override public void exitAssignable(JavaScriptParser.AssignableContext ctx) {assign += 1; }
     /**
      * {@inheritDoc}
      *
@@ -2417,6 +2480,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterNumericLiteral(JavaScriptParser.NumericLiteralContext ctx) {
+        numeric += 1;
         add_Node_node(ctx.getSourceInterval().toString(),"NumericLiteral",id);
         index_stack.push(list.size()-1);
         id += 1;
@@ -2427,6 +2491,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void exitNumericLiteral(JavaScriptParser.NumericLiteralContext ctx) {
+        numeric -= 1;
         int index_top = index_stack.pop();
         count_literal = count_literal + 1;
         createSubTree(index_top,list,count_literal,"Literal",ctx.getText());
@@ -2614,9 +2679,44 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void visitTerminal(TerminalNode node) {
-        add_Node_node(node.getSourceInterval().toString(),node.getText(),id);
+        String type_ = node.getText();
+        if(numeric > 0){
+            return ;
+        }
+        if(type_.startsWith("\"")||type_.startsWith("\'")){
+            add_Node_node(node.getSourceInterval().toString(),"StringLiteral",id);
+            id += 1;
+            return ;
+        }
+        if(map.containsKey(type_)){
+            add_Node_node(node.getSourceInterval().toString(),type_,id);
+            if(type_ == "function"){
+                map.put("function",map.get("function")+1);
+            }else if(type_ == "("&&map.get("function") > 0){
+                map.put("function",map.get("function")-1);
+            }
+            id += 1;
+            return ;
+        }
+        if(map.get("function")==1){
+            add_Node_node(node.getSourceInterval().toString(),"function_name",id);
+            map.put("function",0);id += 1;
+        }else if(expression > 0&& identifier > 0&&memberindex > 0&&expression_seq==memberindex){
+            add_Node_node(node.getSourceInterval().toString(),"array_name",id);id += 1;
+        }else if(expression > 0&& identifier > 0&&memberindex > 0&&expression_seq > memberindex) {
+            add_Node_node(node.getSourceInterval().toString(),"index_para",id);id += 1;
+        }else if(variable_decl > 0&&assign > 0){
+            add_Node_node(node.getSourceInterval().toString(),"variable_name",id);id += 1;
+        }else if(formalparameterarg > 0&&assign > 0){
+            add_Node_node(node.getSourceInterval().toString(),"formalparameter",id);id += 1;
+        }else if(expression > 0&& identifier > 0){
+            add_Node_node(node.getSourceInterval().toString(),"expression_para",id);id += 1;
+        }
+
+
+//        add_Node_node(node.getSourceInterval().toString(),node.getText(),id);
 //        index_stack.push(list.size()-1);
-        id += 1;
+//        id += 1;
     }
     /**
      * {@inheritDoc}

@@ -1,0 +1,1 @@
+while(true){varval=inner.doStuff();if(done)break;}

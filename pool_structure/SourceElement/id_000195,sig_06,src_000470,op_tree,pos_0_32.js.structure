@@ -1,0 +1,16 @@
+SourceElement ,,, 37 ,,, 44 ,,, 605 ,,, 7
+Statement ,,, 37 ,,, 44 ,,, 606 ,,, 7
+VariableStatement ,,, 37 ,,, 44 ,,, 607 ,,, 7
+VariableDeclarationList ,,, 37 ,,, 43 ,,, 608 ,,, 6
+VarModifier ,,, 37 ,,, 37 ,,, 609 ,,, 0
+var ,,, 37 ,,, 37 ,,, 610 ,,, 0
+VariableDeclaration ,,, 39 ,,, 43 ,,, 611 ,,, 4
+Assignable ,,, 39 ,,, 39 ,,, 612 ,,, 0
+Identifier ,,, 39 ,,, 39 ,,, 613 ,,, 0
+variable_name ,,, 39 ,,, 39 ,,, 614 ,,, 0
+= ,,, 41 ,,, 41 ,,, 615 ,,, 0
+LiteralExpression ,,, 43 ,,, 43 ,,, 616 ,,, 0
+Literal ,,, 43 ,,, 43 ,,, 617 ,,, 0
+false ,,, 43 ,,, 43 ,,, 618 ,,, 0
+Eos ,,, 44 ,,, 44 ,,, 619 ,,, 0
+; ,,, 44 ,,, 44 ,,, 620 ,,, 0

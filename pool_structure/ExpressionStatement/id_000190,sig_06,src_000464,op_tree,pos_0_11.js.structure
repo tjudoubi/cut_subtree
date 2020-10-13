@@ -1,0 +1,10 @@
+ExpressionStatement ,,, 88 ,,, 91 ,,, 530 ,,, 3
+ExpressionSequence ,,, 88 ,,, 90 ,,, 531 ,,, 2
+ArgumentsExpression ,,, 88 ,,, 90 ,,, 532 ,,, 2
+IdentifierExpression ,,, 88 ,,, 88 ,,, 533 ,,, 0
+Identifier ,,, 88 ,,, 88 ,,, 534 ,,, 0
+Arguments ,,, 89 ,,, 90 ,,, 535 ,,, 1
+( ,,, 89 ,,, 89 ,,, 536 ,,, 0
+) ,,, 90 ,,, 90 ,,, 537 ,,, 0
+Eos ,,, 91 ,,, 91 ,,, 538 ,,, 0
+; ,,, 91 ,,, 91 ,,, 539 ,,, 0

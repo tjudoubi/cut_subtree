@@ -1,0 +1,17 @@
+VariableDeclarationList ,,, 24 ,,, 34 ,,, 586 ,,, 10
+VarModifier ,,, 24 ,,, 24 ,,, 587 ,,, 0
+var ,,, 24 ,,, 24 ,,, 588 ,,, 0
+VariableDeclaration ,,, 26 ,,, 34 ,,, 589 ,,, 8
+Assignable ,,, 26 ,,, 26 ,,, 590 ,,, 0
+Identifier ,,, 26 ,,, 26 ,,, 591 ,,, 0
+variable_name ,,, 26 ,,, 26 ,,, 592 ,,, 0
+= ,,, 28 ,,, 28 ,,, 593 ,,, 0
+NewExpression ,,, 30 ,,, 34 ,,, 594 ,,, 4
+new ,,, 30 ,,, 30 ,,, 595 ,,, 0
+ArgumentsExpression ,,, 32 ,,, 34 ,,, 596 ,,, 2
+IdentifierExpression ,,, 32 ,,, 32 ,,, 597 ,,, 0
+Identifier ,,, 32 ,,, 32 ,,, 598 ,,, 0
+variable_name ,,, 32 ,,, 32 ,,, 599 ,,, 0
+Arguments ,,, 33 ,,, 34 ,,, 600 ,,, 1
+( ,,, 33 ,,, 33 ,,, 601 ,,, 0
+) ,,, 34 ,,, 34 ,,, 602 ,,, 0

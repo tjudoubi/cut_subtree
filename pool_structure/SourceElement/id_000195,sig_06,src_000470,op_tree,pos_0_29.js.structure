@@ -1,0 +1,12 @@
+SourceElements ,,, 8 ,,, 10 ,,, 551 ,,, 2
+SourceElement ,,, 8 ,,, 10 ,,, 552 ,,, 2
+Statement ,,, 8 ,,, 10 ,,, 553 ,,, 2
+ExpressionStatement ,,, 8 ,,, 10 ,,, 554 ,,, 2
+ExpressionSequence ,,, 8 ,,, 10 ,,, 555 ,,, 2
+ArgumentsExpression ,,, 8 ,,, 10 ,,, 556 ,,, 2
+IdentifierExpression ,,, 8 ,,, 8 ,,, 557 ,,, 0
+Identifier ,,, 8 ,,, 8 ,,, 558 ,,, 0
+Arguments ,,, 9 ,,, 10 ,,, 559 ,,, 1
+( ,,, 9 ,,, 9 ,,, 560 ,,, 0
+) ,,, 10 ,,, 10 ,,, 561 ,,, 0
+Eos ,,, 11 ,,, 10 ,,, 562 ,,, -1

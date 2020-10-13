@@ -1,0 +1,13 @@
+FunctionBody ,,, 8 ,,, 10 ,,, 380 ,,, 2
+SourceElements ,,, 8 ,,, 10 ,,, 381 ,,, 2
+SourceElement ,,, 8 ,,, 10 ,,, 382 ,,, 2
+Statement ,,, 8 ,,, 10 ,,, 383 ,,, 2
+ExpressionStatement ,,, 8 ,,, 10 ,,, 384 ,,, 2
+ExpressionSequence ,,, 8 ,,, 10 ,,, 385 ,,, 2
+ArgumentsExpression ,,, 8 ,,, 10 ,,, 386 ,,, 2
+IdentifierExpression ,,, 8 ,,, 8 ,,, 387 ,,, 0
+Identifier ,,, 8 ,,, 8 ,,, 388 ,,, 0
+Arguments ,,, 9 ,,, 10 ,,, 389 ,,, 1
+( ,,, 9 ,,, 9 ,,, 390 ,,, 0
+) ,,, 10 ,,, 10 ,,, 391 ,,, 0
+Eos ,,, 11 ,,, 10 ,,, 392 ,,, -1

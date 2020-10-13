@@ -1,0 +1,12 @@
+SourceElement ,,, 90 ,,, 93 ,,, 700 ,,, 3
+Statement ,,, 90 ,,, 93 ,,, 701 ,,, 3
+ExpressionStatement ,,, 90 ,,, 93 ,,, 702 ,,, 3
+ExpressionSequence ,,, 90 ,,, 92 ,,, 703 ,,, 2
+ArgumentsExpression ,,, 90 ,,, 92 ,,, 704 ,,, 2
+IdentifierExpression ,,, 90 ,,, 90 ,,, 705 ,,, 0
+Identifier ,,, 90 ,,, 90 ,,, 706 ,,, 0
+Arguments ,,, 91 ,,, 92 ,,, 707 ,,, 1
+( ,,, 91 ,,, 91 ,,, 708 ,,, 0
+) ,,, 92 ,,, 92 ,,, 709 ,,, 0
+Eos ,,, 93 ,,, 93 ,,, 710 ,,, 0
+; ,,, 93 ,,, 93 ,,, 711 ,,, 0
