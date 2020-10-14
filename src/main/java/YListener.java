@@ -63,6 +63,8 @@ public class YListener extends JavaScriptParserBaseListener{
     };
     ArrayList<Node> list = new ArrayList<>();
     Stack<Integer> index_stack = new Stack<>();
+    Stack<Integer> index_terminal = new Stack();
+    ArrayList<String> terminal_list = new ArrayList<>();
     public static String parent_file_name;
     /**
      * {@inheritDoc}
@@ -581,6 +583,7 @@ public class YListener extends JavaScriptParserBaseListener{
      * <p>The default implementation does nothing.</p>
      */
     @Override public void enterForStatement(JavaScriptParser.ForStatementContext ctx) {
+        System.out.println(ctx.getText());
         add_Node_node(ctx.getSourceInterval().toString(),"Block",id);
         index_stack.push(list.size()-1);
         id += 1;
