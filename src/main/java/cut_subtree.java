@@ -19,8 +19,8 @@ public class cut_subtree {
 
         JavaScriptParser parser = new JavaScriptParser(tokens);
         ParseTree tree = parser.program();
-        YVisitor visitor = new YVisitor();
-        visitor.visit(tree);
+//        YVisitor visitor = new YVisitor();
+//        visitor.visit(tree);
 
         ParseTreeWalker walker = new ParseTreeWalker();
 
